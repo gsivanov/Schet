@@ -5,15 +5,14 @@ using Schet.Models;
 
 
 
-
-Parsers.Parse_Hrono();
+//Parsers.Parse_Hrono();
 
 
 //var ddd = Helper.SplitBySpaces("ff33ff    dddddd  ggg   dddd    s1234s");
 ;
 
 //string[] lines = File.ReadAllLines("C:\\gsiv\\EOOD\\2024\\reg_2024.cs");
-string[] lines = File.ReadAllLines("C:\\gsiv\\EOOD\\2024\\reg_2024.cs");
+string[] lines = File.ReadAllLines("C:\\gsiv\\DDS\\register\\reg_2024.cs");
 
 var operation = string.Empty;
 var vedomost = new Vedomost();
