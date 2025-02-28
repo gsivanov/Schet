@@ -2,7 +2,9 @@
 
 public class Faktur
 {
-	public string Number { get; set; }
+	public string ID { get; set; }
+
+	public DateTime DTime { get; set; }
 
 	public string Product { get; set; }
 
@@ -12,16 +14,21 @@ public class Faktur
 
 	public decimal PriceVAT_09 { get; set; }
 
-	public string ContractorVAT { get; set; }
+	public string ContractorID { get; set; }
 
 	public string ContractorName { get; set; }
 
-	public bool PayedInCashe { get; set; }
+	public bool PaymentInCashe { get; set; }
 
-	public DateTime DateCreated { get; set; }
+	public int ServiceType { get; set; }
+
 	public Faktur()
 	{
-		Number = string.Empty;
+	}
+
+	public int Period
+	{
+		get { return DTime.Month; }
 	}
 
 	public bool Product_Electricity()
@@ -47,7 +54,7 @@ public class Faktur
 	}
 
 
-	public bool Pay_InCash()
+	public bool PaymentIsInCash()
 	{
 		return Product.Contains("брой") ? true : false;
 	}
