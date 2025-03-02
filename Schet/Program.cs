@@ -90,15 +90,15 @@ for (int i = 0; i < lines.Length; i++)
 
 		if (pokupka.ServiceType == 0)
 		{
-			vedomost.AddDebitCredit(periodId, 601, 401, pokupka.PriceBase);		// 601 материали
-			vedomost.AddDebitCredit(periodId, 4531, 401, pokupka.PriceVAT_20);
+			vedomost.AddDebitCredit( 601, 401, pokupka.PriceBase, pokupka.Period);		// 601 материали
+			vedomost.AddDebitCredit( 4531, 401, pokupka.PriceVAT_20, pokupka.Period );
 		}
 
 
 		if (pokupka.ServiceType == ServiceType.Materials_601)
 		{
 			vedomost.AddDebitCredit( 601,  401, pokupka.PriceBase, pokupka.Period);
-			vedomost.AddDebitCredit( 4531, 401, pokupka.PriceVAT_20, pokupka.Pariod );
+			vedomost.AddDebitCredit( 4531, 401, pokupka.PriceVAT_20, pokupka.Period );
 		}
 		if (pokupka.ServiceType == ServiceType.ExternalService_602)
 		{
@@ -145,8 +145,8 @@ for (int i = 0; i < lines.Length; i++)
 		// 0000000001  01.04.2023  411 453/2   2.97    Ф - ра    01.04.2023  0000000019  Физически лица  нощувки
 		if (prodagba.Product_Accomodation())
 		{
-			vedomost.AddDebitCredit(periodId, 411,  703, prodagba.PriceBase);
-			vedomost.AddDebitCredit(periodId, 411, 4532, prodagba.PriceVAT_20);
+			vedomost.AddDebitCredit(411,  703, prodagba.PriceBase, prodagba.Period);
+			vedomost.AddDebitCredit(411, 4532, prodagba.PriceVAT_20, prodagba.Period);
 		}
 		else if (prodagba.Product_Protokol())
 		{
@@ -172,7 +172,7 @@ for (int i = 0; i < lines.Length; i++)
 	}
 
 
-	}
+	//}
 }
 
 ;
