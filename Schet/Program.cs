@@ -6,7 +6,7 @@ using Schet.Models;
 
 
 
-Parsers.Parse_Hrono();
+// Parsers.Parse_Hrono();
 
 
 //var ddd = Helper.SplitBySpaces("ff33ff    dddddd  ggg   dddd    s1234s");
@@ -99,7 +99,7 @@ for (int i = 0; i < lines.Length; i++)
 
 		if (pokupka.ContractorVAT == Contractors.DEGA)
 		{
-			vedomost.AddDebitCredit(periodId, 601, 401, pokupka.PriceBase);		// 601 материали
+			vedomost.AddDebitCredit(periodId, 601, 401, pokupka.PriceBase);     // 601 материали
 			vedomost.AddDebitCredit(periodId, 4531, 401, pokupka.PriceVAT_20);
 		}
 		else if (buy602_ExternalService)
@@ -156,7 +156,7 @@ for (int i = 0; i < lines.Length; i++)
 		// 0000000001  01.04.2023  411 453/2   2.97    Ф - ра    01.04.2023  0000000019  Физически лица  нощувки
 		if (prodagba.Product_Accomodation())
 		{
-			vedomost.AddDebitCredit(periodId, 411,  703, prodagba.PriceBase);
+			vedomost.AddDebitCredit(periodId, 411, 703, prodagba.PriceBase);
 			vedomost.AddDebitCredit(periodId, 411, 4532, prodagba.PriceVAT_20);
 		}
 		else if (prodagba.Product_Protokol())
@@ -169,6 +169,11 @@ for (int i = 0; i < lines.Length; i++)
 		}
 
 
+	}
+
+	if (operation == Operations.Bank)
+	{
+		
 	}
 }
 
