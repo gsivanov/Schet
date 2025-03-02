@@ -51,17 +51,17 @@ public static class Helper
 
 		var number_date = splits[0].Trim().Split('/');
 		var fakNumber = number_date[0];
-		faktur.Number = fakNumber.Substring(3);
+		faktur.ID = fakNumber.Substring(3);
 
 		var fakDate = number_date[1];
 		var splitDate = fakDate.Split('.');
 		int day = int.Parse(splitDate[0].Trim());
 		int month = int.Parse(splitDate[1].Trim());
 		int year = int.Parse(splitDate[2].Trim());
-		faktur.DateCreated = new DateTime(year, month, day);
+		faktur.DTime = new DateTime(year, month, day);
 
 		var bgvat_name = splits[1].Trim().Split('/');
-		faktur.ContractorVAT = bgvat_name[0].Trim();
+		faktur.ContractorID = bgvat_name[0].Trim();
 		faktur.ContractorName = bgvat_name[1].Trim();
 
 		faktur.Product = splits[2].Trim();
@@ -75,7 +75,7 @@ public static class Helper
 		var last = splits[splits.Length - 1].Trim();
 		if (last.Contains("в брой"))
 		{
-			faktur.PayedInCashe = true;
+			faktur.PaymentInCashe = true;
 		}
 		return faktur;
 	}
@@ -88,17 +88,17 @@ public static class Helper
 		var faktur = new Faktur();
 		var number_date = splits[0].Trim().Split('/');
 		var fakNumber = number_date[0];
-		faktur.Number = fakNumber.Substring(3);
+		faktur.ID = fakNumber.Substring(3);
 
 		var fakDate = number_date[1];
 		var splitDate = fakDate.Split('.');
 		int day = int.Parse(splitDate[0].Trim());
 		int month = int.Parse(splitDate[1].Trim());
 		int year = int.Parse(splitDate[2].Trim());
-		faktur.DateCreated = new DateTime(year, month, day);
+		faktur.DTime = new DateTime(year, month, day);
 
 		var bgvat_name = splits[1].Trim().Split('/');
-		faktur.ContractorVAT = bgvat_name[0].Trim();
+		faktur.ContractorID = bgvat_name[0].Trim();
 		faktur.ContractorName = bgvat_name[1].Trim();
 
 		faktur.Product = splits[2].Trim();
@@ -118,5 +118,25 @@ public static class Helper
 		}
 
 		return faktur;
+	}
+
+
+	public static Payment ParsePayment(string[] columns)
+	{
+		// -------------------------------------------------------------------------------------------------------------------- кредит --- дебит
+		// 12.03.2024    НАП                      206450255 АПВ П 22220424031667 0 04 001 08 03 2024                             18.44     0.00
+		// 02.04.2024    МИГ МАРКЕТ ВАРНА ООД     Вносна бележка: Ток 2000000303,3000000450,3000000540,3000000630,3000000721      0.00     44.79
+		var payment = new Payment();
+		var split_date = columns[0].Trim().Split('.');
+		int day = int.Parse(split_date[0].Trim());
+		int month = int.Parse(split_date[1].Trim());
+		int year = int.Parse(split_date[2].Trim());
+		payment.DTime = new DateTime(year, month, day);
+
+		payment.Contractor = columns[1].Trim();
+		payment.Description = columns[2].Trim();
+		payment.Debit = decimal.Parse(columns[3].Trim());
+		payment.Credit = decimal.Parse(columns[4].Trim());
+		return payment;
 	}
 }

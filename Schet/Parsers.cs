@@ -7,8 +7,8 @@ public class Parsers
 {
 	public static void Parse_Hrono()
 	{
-		string readFile = "C:\\gsiv\\DDS\\_registers\\ХронРег2023_tabs.txt";
-		string saveFile = "C:\\gsiv\\DDS\\_registers\\ХронРег2023.html";
+		string readFile = "C:\\gsiv\\DDS\\register\\2023_hrono_tabs.txt";
+		string saveFile = "C:\\gsiv\\DDS\\register\\2023_hrono.html";
 
 		string[] lines = File.ReadAllLines(readFile);
 

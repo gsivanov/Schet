@@ -10,11 +10,11 @@ public class Vedomost
 		Periods = new List<Period>();	
 	}
 
-	public void AddDebitCredit(int periodId, int accountDebit, int accountCredit, decimal Money)
+	public void AddDebitCredit(int DebitAccount, int CreditAccount, decimal Money, int periodId)
 	{
 		var period = GetPeriod(periodId);
-		var accountForDebit = period.GetAccount(accountDebit);
-		var accountForCredit = period.GetAccount(accountCredit);
+		var accountForDebit = period.GetAccount(DebitAccount);
+		var accountForCredit = period.GetAccount(CreditAccount);
 		accountForDebit.Debit += Money;
 		accountForCredit.Credit += Money;
 	}
