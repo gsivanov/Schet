@@ -160,11 +160,18 @@ for (int i = 0; i < lines.Length; i++)
 	else if (operation == Operations.Bank)
 	{
 		var payment = Helper.ParsePayment(columns);
-		// 12.03.2024
-		// НАП	
-		// 206450255 АПВ П 22220424031667 0 04 001 08 03 2024
-		// 18.44
-		// 0.00
+		if (payment.IsCredit)
+		{
+			// 12.03.2024 , НАП , 206450255 АПВ П 22220424031667 0 04 001 08 03 2024 , 18.44 , 0.00
+			// 503-1 / 453-8
+			if (payment.Contractor_NAP)
+				vedomost.AddDebitCredit(503, 4538, payment.Credit, payment.Period);
+		}
+		if (payment.IsDebit)
+		{
+
+		}
+
 	}
 	else	
 	{

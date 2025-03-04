@@ -20,4 +20,18 @@ public class Payment
 	{
 		get { return DTime.Month; }
 	}
+
+	public bool IsDebit
+	{
+		get { return Debit > 0 ? true : false;  }
+	}
+	public bool IsCredit
+	{
+		get { return Credit > 0 ? true : false; }
+	}
+	public bool Contractor_NAP
+	{
+		get { return Contractor.Contains("НАП") ? true : false; }
+	}
+
 }
