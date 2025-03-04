@@ -162,14 +162,54 @@ for (int i = 0; i < lines.Length; i++)
 		var payment = Helper.ParsePayment(columns);
 		if (payment.IsCredit)
 		{
-			// 12.03.2024 , НАП , 206450255 АПВ П 22220424031667 0 04 001 08 03 2024 , 18.44 , 0.00
-			// 503-1 / 453-8
-			if (payment.Contractor_NAP)
+			// 12.03.2024     НАП        206450255 АПВ П 22220424031667 0 04 001 08 03 2024     18.44     0.00
+			if (payment.Contractor_NAP)	// 503-1 / 453-8
+			{
 				vedomost.AddDebitCredit(503, 4538, payment.Credit, payment.Period);
+			}
+			// 01.08.2024    BOOKING.COM BV                 NO.LQ3VQVV6ENEIMLEU / 7349736                                                    3137.96     0.00
+			// 01.08.2024    BOOKING.COM BV                 NO.G32KZITWVY4K0XXL / 7263653                                                    3293.84     0.0 0
+			else if (payment.Contractor_Booking) 
+			{
+				// получен превод от Booking
+				vedomost.AddDebitCredit(503, 411, payment.Credit, payment.Period);
+			}
+			else
+			{
+				throw new Exception("");
+			}
+
 		}
 		if (payment.IsDebit)
 		{
-
+			// 02.04.2024    МИГ МАРКЕТ ВАРНА ООД	         Вносна бележка: Ток 2000000303,3000000450,3000000540,3000000630,3000000721        0.00     44.79
+			// 14.06.2024    ИНА ХИМ ДИМИТЪР ДИМИТРОВ ЕТ	 Вносна бележка: Счетоводна услуга	                                               0.00     460.00
+			// 18.07.2024    ВиК Варна	                     ВИК Варна 41889(41889)	                                                           0.00     21.26
+			if (payment.Contractor_MigMarket ||
+				payment.Contractor_VIK_VARNA ||
+				payment.Contractor_Svetlozar ||
+				payment.Contractor_InaHim )
+			{
+				vedomost.AddDebitCredit(401, 503, payment.Debit, payment.Period);
+			}
+			// 02.04.2024     ePay.bg                  Такса банков превод	                                0.00     0.90
+			else if (payment.Contractor_BankTax)
+			{
+				//Банкова такса от фибанк  12, 14 лева
+				//629 / 503   - 12.00
+				//629 / 503/1 - 14.00  Ина димитрова
+				vedomost.AddDebitCredit(629, 503, payment.Debit, payment.Period);
+			}
+			// 13.07.2024    НАП ОБОРИЩЕ 2204	        Вносна бележка: 110000 - ДДС за 2024.06	            0.00     24.24
+			else if (payment.Contractor_NAP) 
+			{
+				// 453/9  /  503/1 - 134.23   банково извлечение  Ина = 134,23 
+				vedomost.AddDebitCredit(453, 503, payment.Debit, payment.Period);
+			}
+			else
+			{
+				throw new Exception("");
+			}
 		}
 
 	}

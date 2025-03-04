@@ -135,8 +135,8 @@ public static class Helper
 
 		payment.Contractor = columns[1].Trim();
 		payment.Description = columns[2].Trim();
-		payment.Debit = decimal.Parse(columns[3].Trim());
-		payment.Credit = decimal.Parse(columns[4].Trim());
+		payment.Credit = decimal.Parse(columns[3].Trim());
+		payment.Debit = decimal.Parse(columns[4].Trim());		
 		return payment;
 	}
 }

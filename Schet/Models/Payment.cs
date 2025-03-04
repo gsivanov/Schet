@@ -29,9 +29,34 @@ public class Payment
 	{
 		get { return Credit > 0 ? true : false; }
 	}
+	public bool Contractor_Booking
+	{
+		get { return Contractor.Contains("BOOKING") ? true : false; }
+	}
 	public bool Contractor_NAP
 	{
 		get { return Contractor.Contains("НАП") ? true : false; }
+	}
+	public bool Contractor_VIK_VARNA
+	{
+		get { return Contractor.Contains("ВИК Варна") ? true : false; }
+	}
+	public bool Contractor_MigMarket
+	{
+		get { return Contractor.Contains("МИГ МАРКЕТ") ? true : false; }
+	}
+	public bool Contractor_InaHim
+	{
+		get { return Contractor.Contains("ИНА ХИМ") ? true : false; }
+	}
+	public bool Contractor_Svetlozar
+	{
+		get { return Contractor.Contains("Светлозар") ? true : false; }
+	}
+
+	public bool Contractor_BankTax
+	{
+		get { return Description.Contains("Такса банков превод") ? true : false; }
 	}
 
 }
